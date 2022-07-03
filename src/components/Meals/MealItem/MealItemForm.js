@@ -6,11 +6,11 @@ const MealItemForm = (props) => {
   return (
     <form className={cl.form}>
       <Input label='Количество' input={{
-        id:'amount',
+        id:props.id,
         type:'number',
-        min:'0',
+        min:'1',
         step:'1',
-        defaultValue:'0'
+        defaultValue:'1'
       }}/>
       <button>Добавить</button>
     </form>

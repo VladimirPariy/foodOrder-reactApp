@@ -8,7 +8,10 @@ const MealsList = () => {
   const mealList = DUMMY_MEALS.map(meal => <MealItem name={meal.name}
                                                      description={meal.description}
                                                      price={meal.price}
-                                                     key={meal.id}/>)
+                                                     key={meal.id}
+                                                     id={meal.id}
+    />
+  )
   return (
     <section className={cl.meals}>
       <Card>
