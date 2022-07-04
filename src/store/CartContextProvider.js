@@ -4,16 +4,37 @@ import CartContext from "./cart-context";
 const defaultCartState = {items: [], totalAmount: 0}
 
 const cartReducer = (state, action) => {
-  if(action.type === "ADD_ITEM"){
-  const updatedItems = state.items.concat(action.item);
-  const updatedTotalAmount = state.totalAmount + action.item.price *action.item.amount
+  if (action.type === "ADD_ITEM") {
+    const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount
+    
+    const existingCartItemIndex = state.items.findIndex(item =>
+      item.id === action.item.id
+    )
+    
+    const existingCartItem = state.items[existingCartItemIndex]
+    
+    let updatedItem;
+    let updatedItems;
+    if (existingCartItem) {
+      updatedItem = {
+        ...existingCartItem,
+        amount: existingCartItem.amount = action.item.amount
+      }
+      updatedItem = [...state.items,]
+      updatedItem[existingCartItemIndex] = updatedItem
+    } else {
+      updatedItem = {
+        ...action.item
+      }
+      updatedItems = state.items.concat(updatedItem);
+    }
+    
     return {
-    items:updatedItems,
+      items: updatedItems,
       totalAmount: updatedTotalAmount
     }
   }
-//   if()
-//
+  
   return defaultCartState
 }
 
@@ -21,7 +42,7 @@ const cartReducer = (state, action) => {
 const CartContextProvider = (props) => {
   
   const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState)
-
+  
   const addItemHandler = (item) => {
     dispatchCartAction({
       type: 'ADD_ITEM',
