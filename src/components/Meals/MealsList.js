@@ -5,10 +5,13 @@ import Card from "../UI/card/Card";
 import MealItem from "./MealItem/MealItem";
 
 const MealsList = () => {
+  
+  
   const mealList = DUMMY_MEALS.map(meal => <MealItem name={meal.name}
                                                      description={meal.description}
                                                      price={meal.price}
                                                      key={meal.id}
+                                                     amount={meal.amount}
                                                      id={meal.id}
     />
   )
